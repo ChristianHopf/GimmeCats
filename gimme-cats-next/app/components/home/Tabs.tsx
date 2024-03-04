@@ -5,7 +5,7 @@ export default function Tabs({ onSelect }: any) {
         onClick={() => {
           onSelect("breeds");
         }}
-        className="text-4xl px-8 py-4 rounded-md drop-shadow bg-white"
+        className="text-4xl px-8 py-4 rounded-md shadow border border-gray-200 bg-white hover:bg-gray-100 cursor-pointer"
       >
         Breeds
       </button>
@@ -13,7 +13,7 @@ export default function Tabs({ onSelect }: any) {
         onClick={() => {
           onSelect("facts");
         }}
-        className="text-4xl px-8 py-4 rounded-md drop-shadow bg-white"
+        className="text-4xl px-8 py-4 rounded-md shadow border border-gray-200 bg-white hover:bg-gray-100 cursor-pointer"
       >
         Facts
       </button>

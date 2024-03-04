@@ -22,7 +22,6 @@ export default function RandomCatBreed() {
   const getBreed = async () => {
     const res = await fetch("api/random");
     const data = await res.json();
-    console.log(data);
     setBreed(data[0]);
     setLoading(false);
   };
@@ -53,7 +52,7 @@ export default function RandomCatBreed() {
         <div className="w-1/3 flex flex-col mx-0">
           <button
             onClick={getAnotherBreed}
-            className="bg-white rounded-lg drop-shadow w-2/3 mx-auto px-8 py-8 mt-4"
+            className="bg-white border border-gray-200 rounded-lg shadow w-2/3 mx-auto px-8 py-8 mt-4"
           >
             <p className="text-4xl">Click for a random cat!</p>
           </button>
@@ -62,7 +61,7 @@ export default function RandomCatBreed() {
               <h1 className="text-4xl">{breed.breeds[0].name}</h1>
               <p className="text-xl text-stone-600">{breed.breeds[0].origin}</p>
             </header>
-            <div className="bg-white rounded-lg drop-shadow px-4 py-4">
+            <div className="bg-white border border-gray-200 rounded-lg shadow px-4 py-4">
               <Image
                 src={breed.url}
                 width={200}
@@ -76,7 +75,7 @@ export default function RandomCatBreed() {
                   ? `Alternative names: ${breed.breeds[0].alt_names}`
                   : ""}
               </p>
-              <p className="text-xl">{breed.breeds[0].description}</p>
+              <p className="text-lg">{breed.breeds[0].description}</p>
             </div>
           </div>
         </div>

@@ -14,14 +14,16 @@ export default function BreedSearch({ breeds }: any) {
   useEffect(() => {
     // When breed results load, set loading to false
     setLoading(false);
-  }, [breedResults])
+  }, [breedResults]);
 
   const handleChange = (event: any) => {
     setBreedInput(event.target.value);
   };
 
   const searchBreeds = async () => {
-    // put breedInput in the proper form
+    // Set loading state to true
+    setLoading(true);
+    // Put breedInput in the proper form
     const searchInput = breedInput.split(" ").join("").trim().toLowerCase();
     // Initialize list of matches
     let matches = [];
@@ -35,8 +37,13 @@ export default function BreedSearch({ breeds }: any) {
     // For every match, get its breed data
     let results: any = [];
     for (const match of matches) {
+      // API returns an empty array on any request with id mala
+      if (match === "mala") {
+        continue;
+      }
       const res = await fetch(`api/breed/${match}`);
       const result = await res.json();
+      console.log(result[0]);
       results.push(result[0]);
     }
     setBreedResults(results);
@@ -44,24 +51,26 @@ export default function BreedSearch({ breeds }: any) {
   };
 
   return (
-    <div className="w-full mt-4 rounded-md drop-shadow bg-white">
-      <header className="flex flex-row justify-between px-4 py-2 items-center">
-        <div className="flex flex-row gap-4">
-          <h3 className="text-xl">Search breeds:</h3>
-          <input
-            type="text"
-            value={breedInput}
-            onChange={handleChange}
-            className="bg-stone-100 rounded drop-shadow border-2 border-black"
-          />
-          <button onClick={searchBreeds}>Search</button>
-        </div>
-        <button className=" bg-stone-200 rounded px-4 py-2 text-xl">
-          Filter
-        </button>
-      </header>
+    <>
+      <div className="w-full max-w-[1000px] mt-4 rounded-md shadow border border-gray-200 bg-white">
+        <header className="flex flex-row justify-between px-4 py-2 items-center">
+          <div className="flex flex-row gap-4">
+            <h3 className="text-xl">Search breeds:</h3>
+            <input
+              type="text"
+              value={breedInput}
+              onChange={handleChange}
+              className="px-2 py-1 rounded-md shadow border border-gray-200 h-full"
+            />
+            <button onClick={searchBreeds}>Search</button>
+          </div>
+          <button className=" bg-stone-200 rounded px-4 py-2 text-xl">
+            Filter
+          </button>
+        </header>
+      </div>
       {loading && (
-        <div>
+        <div className="mt-8">
           <Oval
             visible={true}
             height="80"
@@ -74,11 +83,13 @@ export default function BreedSearch({ breeds }: any) {
           />
         </div>
       )}
-      <div className="flex flex-col items-start">
-        {breedResults?.map((breed: any) => {
-          return <BreedCard key={breed.breeds[0].id} breed={breed} />;
-        })}
-      </div>
-    </div>
+      {!loading && breedResults?.length > 0 && (
+        <div className="flex flex-col items-start mt-4 px-4 py-4 gap-4 shadow border border-gray-200 rounded-lg overflow-auto max-h-[900px]">
+          {breedResults?.map((breed: any) => {
+            return <BreedCard key={breed.breeds[0].id} breed={breed} />;
+          })}
+        </div>
+      )}
+    </>
   );
 }

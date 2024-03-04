@@ -8,8 +8,8 @@ export default async function Home() {
   const breeds = await fs.readFile(process.cwd() + "/app/breeds.json", "utf8");
   return (
     <>
-      <Header />
-      <section className="flex flex-row w-full container">
+      {/* <Header /> */}
+      <section className="flex flex-row w-full container mb-16">
         <InfoCard breeds={breeds} />
         <RandomCatBreed />
       </section>
