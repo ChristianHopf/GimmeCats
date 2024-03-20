@@ -5,7 +5,7 @@ import BreedSearch from "./BreedSearch";
 import CatFacts from "./CatFacts";
 import { useState } from "react";
 
-export default function InfoCard({ breeds }: any) {
+export default function InfoCard() {
   const [selectedCard, setSelectedCard] = useState("breeds");
 
   const handleSelectCard = (tab: string) => {
@@ -15,7 +15,7 @@ export default function InfoCard({ breeds }: any) {
   return (
     <div className="w-2/3 flex flex-col items-center">
       <Tabs onSelect={handleSelectCard} />
-      {selectedCard === "breeds" && <BreedSearch breeds={breeds} />}
+      {selectedCard === "breeds" && <BreedSearch />}
       {selectedCard === "facts" && <CatFacts />}
     </div>
   );

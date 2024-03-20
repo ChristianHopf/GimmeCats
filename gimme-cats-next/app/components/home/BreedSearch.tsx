@@ -4,8 +4,11 @@ import { useEffect, useState } from "react";
 import BreedCard from "./BreedCard";
 import type { Breed } from "../../models/Breed";
 import { Oval } from "react-loader-spinner";
+import { useAppContext } from "@/context";
 
-export default function BreedSearch({ breeds }: any) {
+export default function BreedSearch() {
+  const { breeds } = useAppContext();
+
   const [breedInput, setBreedInput] = useState("");
   const [breedResults, setBreedResults] = useState<[] | undefined>([]);
 
@@ -29,7 +32,7 @@ export default function BreedSearch({ breeds }: any) {
     let matches = [];
     // For every breed, check if the name contains the text input
     // If it does, add its id to the list of matches
-    for (const breed of JSON.parse(breeds)) {
+    for (const breed of breeds) {
       if (breed.name.includes(searchInput)) {
         matches.push(breed.id);
       }
@@ -54,17 +57,22 @@ export default function BreedSearch({ breeds }: any) {
     <>
       <div className="w-full max-w-[1000px] mt-4 rounded-md shadow border border-gray-200 bg-white">
         <header className="flex flex-row justify-between px-4 py-2 items-center">
-          <div className="flex flex-row gap-4">
+          <div className="flex flex-row gap-4 items-center">
             <h3 className="text-xl">Search breeds:</h3>
             <input
               type="text"
               value={breedInput}
               onChange={handleChange}
-              className="px-2 py-1 rounded-md shadow border border-gray-200 h-full"
+              className="px-2 py-1 rounded-md shadow border border-gray-200 h-full focus:outline-none focus:border-gray-400"
             />
-            <button onClick={searchBreeds}>Search</button>
+            <button
+              className=" hover:bg-gray-200 rounded px-4 py-2 text-lg"
+              onClick={searchBreeds}
+            >
+              Search
+            </button>
           </div>
-          <button className=" bg-stone-200 rounded px-4 py-2 text-xl">
+          <button className=" hover:bg-gray-200 rounded px-4 py-2 text-lg">
             Filter
           </button>
         </header>
@@ -76,7 +84,7 @@ export default function BreedSearch({ breeds }: any) {
             height="80"
             width="80"
             color="#000000"
-            secondaryColor="#282828"
+            secondaryColor="#e5e7eb"
             ariaLabel="oval-loading"
             //   wrapperStyle
             //   wrapperClass
