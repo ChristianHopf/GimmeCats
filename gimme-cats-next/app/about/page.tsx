@@ -1,7 +1,10 @@
+import ProjectInfo from "./ProjectInfo";
+import TechStack from "./TechStack";
+
 export default function AboutPage() {
   return (
-    <div>
-      <h1>About page</h1>
-    </div>
+    <section className="flex flex-col w-1/2 container">
+      <ProjectInfo />
+    </section>
   );
 }

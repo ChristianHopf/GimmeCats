@@ -7,17 +7,18 @@ import { Oval } from "react-loader-spinner";
 import { useAppContext } from "@/context";
 
 export default function BreedSearch() {
-  const { breeds } = useAppContext();
+  const { breeds, searchedBreeds, setSearchedBreeds } = useAppContext();
 
   const [breedInput, setBreedInput] = useState("");
-  const [breedResults, setBreedResults] = useState<[] | undefined>([]);
+  const [breedResults, setBreedResults] = useState<Breed[] | undefined>([]);
 
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // When breed results load, set loading to false
     setLoading(false);
-  }, [breedResults]);
+    setBreedResults(searchedBreeds);
+  }, [searchedBreeds]);
 
   const handleChange = (event: any) => {
     setBreedInput(event.target.value);
@@ -49,7 +50,9 @@ export default function BreedSearch() {
       console.log(result[0]);
       results.push(result[0]);
     }
-    setBreedResults(results);
+    // setBreedResults(results);
+    setSearchedBreeds(results);
+    localStorage.setItem("searchedBreeds", JSON.stringify(results));
     console.log(results);
   };
 
@@ -91,7 +94,7 @@ export default function BreedSearch() {
           />
         </div>
       )}
-      {!loading && breedResults?.length > 0 && (
+      {!loading && breedResults && breedResults?.length > 0 && (
         <div className="flex flex-col items-start mt-4 px-4 py-4 gap-4 shadow border border-gray-200 rounded-lg overflow-auto max-h-[900px]">
           {breedResults?.map((breed: any) => {
             return <BreedCard key={breed.breeds[0].id} breed={breed} />;

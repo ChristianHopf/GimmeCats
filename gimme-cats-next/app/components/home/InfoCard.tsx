@@ -14,7 +14,7 @@ export default function InfoCard() {
 
   return (
     <div className="w-2/3 flex flex-col items-center">
-      <Tabs onSelect={handleSelectCard} />
+      {/* <Tabs onSelect={handleSelectCard} /> */}
       {selectedCard === "breeds" && <BreedSearch />}
       {selectedCard === "facts" && <CatFacts />}
     </div>

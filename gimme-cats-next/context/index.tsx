@@ -13,6 +13,9 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
   let [selectedBreed, setSelectedBreed] = useState<Breed | undefined>(
     getLocalStorage("selectedBreed", "")
   );
+  let [searchedBreeds, setSearchedBreeds] = useState<Breed[] | undefined>(
+    getLocalStorage("searchedBreeds", "")
+  );
   let breeds = [
     {
       id: "abys",
@@ -285,7 +288,15 @@ export function AppWrapper({ children }: { children: React.ReactNode }) {
   ];
 
   return (
-    <AppContext.Provider value={{ breeds, selectedBreed, setSelectedBreed }}>
+    <AppContext.Provider
+      value={{
+        breeds,
+        selectedBreed,
+        setSelectedBreed,
+        searchedBreeds,
+        setSearchedBreeds,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

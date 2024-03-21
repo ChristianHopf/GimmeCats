@@ -12,7 +12,7 @@ interface Props {
 
 export default function BreedCard({ breed }: Props) {
   const router = useRouter();
-  const { selectedBreed, setSelectedBreed } = useAppContext();
+  const { setSelectedBreed } = useAppContext();
   const id = breed.breeds[0].id;
 
   // const onSelectBreed = (event: any) => {
@@ -69,7 +69,8 @@ export default function BreedCard({ breed }: Props) {
               </button>
             </div> */}
         </header>
-        <p className="text-lg">{breed.breeds[0].description}</p>
+        <p className="text-lg mb-2">{breed.breeds[0].description}</p>
+        <p className="text-stone-600">Click to learn more</p>
       </div>
     </div>
     // </Link>

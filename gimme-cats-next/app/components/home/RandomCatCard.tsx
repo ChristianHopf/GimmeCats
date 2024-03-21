@@ -1,5 +1,7 @@
 import Image from "next/image";
 import PronounceBreed from "@/app/misc/PronounceBreed";
+import { useRouter } from "next/navigation";
+import { useAppContext } from "@/context";
 
 interface Props {
   getAnotherBreed: () => void;
@@ -18,8 +20,24 @@ interface Props {
 }
 
 export default function RandomCatCard({ getAnotherBreed, breed }: Props) {
+  const router = useRouter();
+  const { setSelectedBreed } = useAppContext();
+  const id = breed.breeds[0].id;
+
   return (
-    <div className="w-1/3 flex flex-col">
+    <div
+      className="w-1/3 flex flex-col"
+      onClick={(e) => {
+        // when card is clicked:
+        // - set selectedBreed in context
+        // - store selectedBreed in local storage
+        // - route to breed page
+        e.stopPropagation();
+        setSelectedBreed(breed);
+        localStorage.setItem("selectedBreed", JSON.stringify(breed));
+        router.push(`/breed/${id}`);
+      }}
+    >
       <button
         onClick={getAnotherBreed}
         className="bg-white border border-gray-200 hover:bg-gray-100 cursor-pointer rounded-lg shadow w-2/3 mx-auto px-8 py-8 mt-4"
@@ -49,7 +67,8 @@ export default function RandomCatCard({ getAnotherBreed, breed }: Props) {
                 ? `Alternative names: ${breed.breeds[0].alt_names}`
                 : ""}
             </p>
-            <p className="text-lg">{breed.breeds[0].description}</p>
+            <p className="text-lg mb-2">{breed.breeds[0].description}</p>
+            <p className="text-stone-600">Click to learn more</p>
           </div>
         </div>
       </div>

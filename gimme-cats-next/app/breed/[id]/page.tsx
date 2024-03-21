@@ -8,12 +8,15 @@ import { Oval } from "react-loader-spinner";
 import { useEffect, useState, useMemo } from "react";
 import { Breed } from "@/app/models/Breed";
 import { useAppContext } from "@/context";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function BreedPage() {
   const { selectedBreed } = useAppContext();
   //   const searchParams = useSearchParams();
   //   const [breed, setBreed] = useState<Breed | undefined>();
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     setLoading(false);
@@ -39,15 +42,23 @@ export default function BreedPage() {
         </div>
       )}
       {!loading && breed && (
-        <section className="flex flex-row w-full container mb-16 gap-8">
-          <BasicInfo
-            name={selectedBreed.breeds[0].name}
-            origin={selectedBreed.breeds[0].origin}
-            url={selectedBreed.url}
-            alt_names={selectedBreed.breeds[0].alt_names}
-            description={selectedBreed.breeds[0].description}
-          />
-          <ExtendedInfo breed={selectedBreed} />
+        <section className="flex flex-col w-full container items-start">
+          <Link
+            href="/"
+            className=" hover:bg-gray-200 rounded px-4 py-2 text-xl mt-4"
+          >
+            {"< "}Back
+          </Link>
+          <div className="flex flex-row mb-16 gap-8">
+            <BasicInfo
+              name={selectedBreed.breeds[0].name}
+              origin={selectedBreed.breeds[0].origin}
+              url={selectedBreed.url}
+              alt_names={selectedBreed.breeds[0].alt_names}
+              description={selectedBreed.breeds[0].description}
+            />
+            <ExtendedInfo breed={selectedBreed} />
+          </div>
         </section>
       )}
     </>
