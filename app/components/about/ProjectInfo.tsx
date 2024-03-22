@@ -21,7 +21,7 @@ function ProjectInfo({}: Props) {
           to serve detailed information on cat breeds from around the world.
           Users can search for a specific breed on the home page, and then
           navigate to its info page, where they can review an in-depth listing
-          of its characteristics to help them find the breed that's right for
+          of its characteristics to help them find the breed that`&apos;`s right for
           them.
         </p>
       </div>

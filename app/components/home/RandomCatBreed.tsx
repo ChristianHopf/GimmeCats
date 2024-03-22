@@ -10,7 +10,7 @@ export default function RandomCatBreed() {
     url: "",
     width: 0,
     height: 0,
-    breeds: [{ name: "", origin: "", alt_names: "", description: "" }],
+    breeds: [{ id: "", name: "", origin: "", alt_names: "", description: "" }],
   });
   const [loading, setLoading] = useState(true);
 

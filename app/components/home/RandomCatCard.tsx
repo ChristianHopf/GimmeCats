@@ -11,6 +11,7 @@ interface Props {
     width: number;
     height: number;
     breeds: {
+      id: string;
       name: string;
       origin: string;
       alt_names: string;

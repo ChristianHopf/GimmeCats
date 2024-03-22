@@ -1,5 +1,4 @@
-import ProjectInfo from "./ProjectInfo";
-import TechStack from "./TechStack";
+import ProjectInfo from "../components/about/ProjectInfo";
 
 export default function AboutPage() {
   return (
