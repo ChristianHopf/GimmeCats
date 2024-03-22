@@ -23,6 +23,7 @@ export default function RandomCatBreed() {
     const res = await fetch("api/random");
     const data = await res.json();
     setBreed(data[0]);
+    console.log(data);
     setLoading(false);
   };
 
